@@ -6,7 +6,6 @@ import App from './App.vue'
 import '@unocss/reset/tailwind.css'
 import './styles/main.css'
 import 'uno.css'
-import 'mapbox-gl/dist/mapbox-gl.css'
 
 const app = createApp(App)
 const router = createRouter({
