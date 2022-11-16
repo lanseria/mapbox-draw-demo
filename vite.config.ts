@@ -6,6 +6,8 @@ import Vue from '@vitejs/plugin-vue'
 import Pages from 'vite-plugin-pages'
 import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
+import { ArcoResolver } from 'unplugin-vue-components/resolvers'
+
 import Unocss from 'unocss/vite'
 
 export default defineConfig({
@@ -37,6 +39,7 @@ export default defineConfig({
 
     // https://github.com/antfu/unplugin-auto-import
     AutoImport({
+      resolvers: [ArcoResolver()],
       imports: [
         'vue',
         'vue/macros',

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import mapboxgl from 'mapbox-gl'
 import MapboxDraw from '@mapbox/mapbox-gl-draw'
-import * as turf from '@turf/turf'
 import {
   CircleMode,
   DirectMode,
@@ -42,6 +41,7 @@ onMounted(() => {
       polygon: true,
       trash: true,
     },
+    userProperties: true,
     modes: {
       ...MapboxDraw.modes,
       draw_circle: CircleMode,
@@ -51,9 +51,10 @@ onMounted(() => {
     },
     // Set mapbox-gl-draw to draw by default.
     // The user does not have to click the polygon control button first.
-    defaultMode: 'simple_select',
+    defaultMode: drawMode.value,
   })
   window.draw = draw
+
   map.addControl(draw)
 
   // map.addControl(new window.MapboxLanguage({ defaultLanguage: "zh-Hans" }));
@@ -65,21 +66,13 @@ onMounted(() => {
   map.on('draw.create', updateArea)
   map.on('draw.delete', updateArea)
   map.on('draw.update', updateArea)
+  map.on('draw.combine', updateArea)
+  map.on('draw.uncombine', updateArea)
+  map.on('draw.selectionchange', updateArea)
+  map.on('draw.modechange', updateArea)
+  map.on('draw.render', updateArea)
+  map.on('draw.actionable', updateArea)
 
-  function updateArea(e: any) {
-    const data = draw.getAll()
-
-    if (data.features.length > 0) {
-      const area = turf.area(data)
-      // Restrict the area to 2 decimal points.
-      const rounded_area = Math.round(area * 100) / 100
-      console.warn(`<p><strong>${rounded_area}</strong></p><p>square meters</p>`)
-    }
-    else {
-      if (e.type !== 'draw.delete')
-        alert('Click the map to draw a polygon.')
-    }
-  }
   map.on('click', 'layer', (e: any) => {
     //
   })
