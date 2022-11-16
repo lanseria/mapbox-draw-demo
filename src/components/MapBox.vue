@@ -2,14 +2,21 @@
 import mapboxgl from 'mapbox-gl'
 import MapboxDraw from '@mapbox/mapbox-gl-draw'
 import * as turf from '@turf/turf'
+import {
+  CircleMode,
+  DirectMode,
+  DragCircleMode,
+  SimpleSelectMode,
+} from 'mapbox-gl-draw-circle'
 import { mapStyle } from '~/constant/map'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css'
+import { mapCenter, mapZoom } from '~/composables/store'
+import { mapLoad } from '~/composables/mapLoad'
 
 mapboxgl.accessToken
   = 'pk.eyJ1IjoibGFuc2VyaWEiLCJhIjoiY2wxMGo5ZWk3MTF3dTNkcnRwcDMyMXowOSJ9.kxLDvTThtaU0uiBOXanNvA'
 
-const SCALE = 14
 let map: mapboxgl.Map | null = null
 const mapContainer = ref()
 
@@ -21,9 +28,10 @@ onMounted(() => {
   map = new mapboxgl.Map({
     container: mapContainer.value,
     style: mapStyle,
-    center: [122.1373164810982, 29.952575962927767],
-    zoom: SCALE,
+    center: mapCenter.value,
+    zoom: mapZoom.value,
   })
+  window.map = map
 
   const draw = new MapboxDraw({
     displayControlsDefault: false,
@@ -33,18 +41,25 @@ onMounted(() => {
       line_string: true,
       polygon: true,
       trash: true,
-      combine_features: true,
-      uncombine_features: true,
+    },
+    modes: {
+      ...MapboxDraw.modes,
+      draw_circle: CircleMode,
+      drag_circle: DragCircleMode,
+      direct_select: DirectMode,
+      simple_select: SimpleSelectMode,
     },
     // Set mapbox-gl-draw to draw by default.
     // The user does not have to click the polygon control button first.
     defaultMode: 'simple_select',
   })
+  window.draw = draw
   map.addControl(draw)
 
   // map.addControl(new window.MapboxLanguage({ defaultLanguage: "zh-Hans" }));
 
   map.on('load', () => {
+    mapLoad()
     updateMap()
   })
   map.on('draw.create', updateArea)
@@ -70,11 +85,11 @@ onMounted(() => {
   })
 
   map.on('mouseenter', 'layer', () => {
-    map.getCanvas().style.cursor = 'pointer'
+    map!.getCanvas().style.cursor = 'pointer'
   })
 
   map.on('mouseleave', 'layer', () => {
-    map.getCanvas().style.cursor = ''
+    map!.getCanvas().style.cursor = ''
   })
 
   // geoControl = new mapboxgl.GeolocateControl({
