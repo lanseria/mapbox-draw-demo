@@ -15,6 +15,7 @@ specifiers:
   eslint: ^8.27.0
   mapbox-gl: ^2.11.0
   mapbox-gl-draw-circle: ^1.1.2
+  numeral: ^2.0.6
   pnpm: ^7.16.0
   typescript: ^4.9.3
   unocss: ^0.46.5
@@ -33,6 +34,7 @@ dependencies:
   '@vueuse/core': 9.5.0_vue@3.2.45
   mapbox-gl: 2.11.0
   mapbox-gl-draw-circle: 1.1.2_mapbox-gl@2.11.0
+  numeral: 2.0.6
   vue: 3.2.45
   vue-router: 4.1.6_vue@3.2.45
 
@@ -4200,6 +4202,10 @@ packages:
 
   /number-precision/1.6.0:
     resolution: {integrity: sha512-05OLPgbgmnixJw+VvEh18yNPUo3iyp4BEWJcrLu4X9W05KmMifN7Mu5exYvQXqxxeNWhvIF+j3Rij+HmddM/hQ==}
+    dev: false
+
+  /numeral/2.0.6:
+    resolution: {integrity: sha1-StCAk21EPCVhrtnyGX7//iX05QY=}
     dev: false
 
   /object-assign/4.1.1:

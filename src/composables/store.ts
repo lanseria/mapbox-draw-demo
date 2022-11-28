@@ -9,3 +9,6 @@ export const mapZoom = useStorage('aoshan-map-zoom', 15) as Ref<number>
 export const drawMode = useStorage('aoshan-map-draw-mode', 'simple_select')
 
 export const polygonFeatureCollection = useStorage('aoshan-map-draw-polygon-featureCollection', []) as Ref<FeatureCollection[]>
+
+export const collapsed = useStorage('aoshan-map-collapsed', false)
+export const activeTab = useStorage('aoshan-map-activeTab', 'edit')

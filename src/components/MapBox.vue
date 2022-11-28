@@ -1,23 +1,28 @@
 <script setup lang="ts">
 import mapboxgl from 'mapbox-gl'
 import MapboxDraw from '@mapbox/mapbox-gl-draw'
-import {
-  CircleMode,
-  DirectMode,
-  DragCircleMode,
-  SimpleSelectMode,
-} from 'mapbox-gl-draw-circle'
+
 import { mapStyle } from '~/constant/map'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css'
-import { mapCenter, mapZoom } from '~/composables/store'
+import { collapsed } from '~/composables/store'
 import { mapLoad } from '~/composables/mapLoad'
+
+import DrawLineString from '~/draw/linestring'
+import DrawRectangle from '~/draw/rectangle'
+import DrawCircle from '~/draw/circle'
+
+import drawStyles from '~/draw/styles'
+
+import ExtendDrawBar from '~/draw/extend_draw_bar'
 
 mapboxgl.accessToken
   = 'pk.eyJ1IjoibGFuc2VyaWEiLCJhIjoiY2wxMGo5ZWk3MTF3dTNkcnRwcDMyMXowOSJ9.kxLDvTThtaU0uiBOXanNvA'
 
 let map: mapboxgl.Map | null = null
 const mapContainer = ref()
+
+let drawing = false
 
 const updateMap = () => {
   //
@@ -27,35 +32,81 @@ onMounted(() => {
   map = new mapboxgl.Map({
     container: mapContainer.value,
     style: mapStyle,
-    center: mapCenter.value,
-    zoom: mapZoom.value,
+    center: [122.1373164810982, 29.952575962927767],
+    zoom: 15,
   })
   window.map = map
 
   const draw = new MapboxDraw({
     displayControlsDefault: false,
-    // Select which mapbox-gl-draw control buttons to add to the map.
-    controls: {
-      point: true,
-      line_string: true,
-      polygon: true,
-      trash: true,
-    },
     userProperties: true,
     modes: {
       ...MapboxDraw.modes,
-      draw_circle: CircleMode,
-      drag_circle: DragCircleMode,
-      direct_select: DirectMode,
-      simple_select: SimpleSelectMode,
+      draw_line_string: DrawLineString,
+      draw_rectangle: DrawRectangle,
+      draw_circle: DrawCircle,
     },
-    // Set mapbox-gl-draw to draw by default.
-    // The user does not have to click the polygon control button first.
-    defaultMode: drawMode.value,
+    styles: drawStyles,
   })
   window.draw = draw
 
-  map.addControl(draw)
+  const drawControl = new ExtendDrawBar({
+    draw: window.draw,
+    buttons: [
+      {
+        on: 'click',
+        action: () => {
+          drawing = true
+          window.draw.changeMode('draw_point')
+        },
+        classes: ['mapbox-gl-draw_ctrl-draw-btn', 'mapbox-gl-draw_point'],
+        title: '画点 (m)',
+      },
+      {
+        on: 'click',
+        action: () => {
+          drawing = true
+          window.draw.changeMode('draw_line_string')
+        },
+        classes: ['mapbox-gl-draw_ctrl-draw-btn', 'mapbox-gl-draw_line'],
+        title: '画线 (l)',
+      },
+      {
+        on: 'click',
+        action: () => {
+          drawing = true
+          window.draw.changeMode('draw_polygon')
+        },
+        classes: ['mapbox-gl-draw_ctrl-draw-btn', 'mapbox-gl-draw_polygon'],
+        title: '画多边形 (p)',
+      },
+      {
+        on: 'click',
+        action: () => {
+          drawing = true
+          window.draw.changeMode('draw_rectangle')
+        },
+        classes: [
+          'mapbox-gl-draw_ctrl-draw-btn',
+          'mapbox-gl-draw_rectangle',
+        ],
+        title: '画矩形 (r)',
+      },
+      // {
+      //   on: 'click',
+      //   action: () => {
+      //     drawing = true
+      //     window.draw.changeMode('draw_circle')
+      //   },
+      //   classes: ['mapbox-gl-draw_ctrl-draw-btn', 'mapbox-gl-draw_circle'],
+      //   title: '画圆圈 (c)',
+      // },
+    ],
+  })
+
+  map.addControl(new mapboxgl.NavigationControl())
+
+  map.addControl(drawControl, 'top-right')
 
   // map.addControl(new window.MapboxLanguage({ defaultLanguage: "zh-Hans" }));
 
@@ -63,53 +114,27 @@ onMounted(() => {
     mapLoad()
     updateMap()
   })
-  map.on('draw.create', updateArea)
-  map.on('draw.delete', updateArea)
-  map.on('draw.update', updateArea)
-  map.on('draw.combine', updateArea)
-  map.on('draw.uncombine', updateArea)
-  map.on('draw.selectionchange', updateArea)
-  map.on('draw.modechange', updateArea)
-  map.on('draw.render', updateArea)
-  map.on('draw.actionable', updateArea)
-
-  map.on('click', 'layer', (e: any) => {
-    //
-  })
-
-  map.on('mouseenter', 'layer', () => {
-    map!.getCanvas().style.cursor = 'pointer'
-  })
-
-  map.on('mouseleave', 'layer', () => {
-    map!.getCanvas().style.cursor = ''
-  })
-
-  // geoControl = new mapboxgl.GeolocateControl({
-  //   positionOptions: {
-  //     enableHighAccuracy: true,
-  //   },
-  //   trackUserLocation: true,
-  // })
-
-  // map.addControl(geoControl)
-
-  // geoControl.on('geolocate', (e: any) => {
-  //
-  // })
 })
+
+const handleCollapsed = () => {
+  if (drawing)
+    console.log('drawing')
+
+  collapsed.value = !collapsed.value
+  setTimeout(() => {
+    window.map.resize()
+  }, 300)
+}
 </script>
 
 <template>
   <div
     ref="mapContainer"
-    :style="{
-      height: '100%',
-      width: '100%',
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0,
-    }"
-  />
+    class="h-full w-full top-0 bottom-0 left-0 right-0 relative"
+  >
+    <div class="sidebar-handle absolute right-0 bottom-9 px-4 py-1 bg-dark cursor-pointer hidden md:block z-10" @click="handleCollapsed()">
+      <div v-if="collapsed" class="i-carbon:caret-left" />
+      <div v-else class="i-carbon:caret-right" />
+    </div>
+  </div>
 </template>

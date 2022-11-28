@@ -1,6 +1,7 @@
 export const mapStyle: mapboxgl.Style = {
   version: 8,
   name: 'Basic',
+  glyphs: 'mapbox://fonts/mapbox/{fontstack}/{range}.pbf',
   sources: {
     seaMapUp: {
       tiles: ['/gis/seaMapUp/{z}/{y}/{x}.png'],
