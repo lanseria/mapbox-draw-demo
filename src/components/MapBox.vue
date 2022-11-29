@@ -16,6 +16,9 @@ import drawStyles from '~/draw/styles'
 
 import ExtendDrawBar from '~/draw/extend_draw_bar'
 
+const keys = useMagicKeys()
+const esc = keys.esc
+
 mapboxgl.accessToken
   = 'pk.eyJ1IjoibGFuc2VyaWEiLCJhIjoiY2wxMGo5ZWk3MTF3dTNkcnRwcDMyMXowOSJ9.kxLDvTThtaU0uiBOXanNvA'
 
@@ -115,7 +118,10 @@ onMounted(() => {
     updateMap()
   })
 })
-
+whenever(() => keys.Delete.value || keys.Backspace.value, () => {
+  console.log('esc/Backspace have been pressed')
+  window.draw.trash()
+})
 const handleCollapsed = () => {
   if (drawing)
     console.log('drawing')
@@ -133,8 +139,8 @@ const handleCollapsed = () => {
     class="h-full w-full top-0 bottom-0 left-0 right-0 relative"
   >
     <div class="sidebar-handle absolute right-0 bottom-9 px-4 py-1 bg-dark cursor-pointer hidden md:block z-10" @click="handleCollapsed()">
-      <div v-if="collapsed" class="i-carbon:caret-left" />
-      <div v-else class="i-carbon:caret-right" />
+      <div v-if="collapsed" class="i-carbon:caret-right" />
+      <div v-else class="i-carbon:caret-left" />
     </div>
   </div>
 </template>
