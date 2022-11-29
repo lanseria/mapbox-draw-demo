@@ -41,7 +41,9 @@ const handleActive = (item: TabItem) => {
         </button>
       </div>
     </div>
-    <div>内容</div>
+    <div>
+      <PropForm />
+    </div>
   </div>
 </template>
 

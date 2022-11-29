@@ -9,6 +9,8 @@ declare global {
   const $shallowRef: typeof import('vue/macros')['$shallowRef']
   const $toRef: typeof import('vue/macros')['$toRef']
   const EffectScope: typeof import('vue')['EffectScope']
+  const TypeEnum: typeof import('./src/composables/store')['TypeEnum']
+  const TypeEnumMap: typeof import('./src/composables/store')['TypeEnumMap']
   const activeTab: typeof import('./src/composables/store')['activeTab']
   const asyncComputed: typeof import('@vueuse/core')['asyncComputed']
   const autoResetRef: typeof import('@vueuse/core')['autoResetRef']
@@ -28,6 +30,7 @@ declare global {
   const createReactiveFn: typeof import('@vueuse/core')['createReactiveFn']
   const createSharedComposable: typeof import('@vueuse/core')['createSharedComposable']
   const createUnrefFn: typeof import('@vueuse/core')['createUnrefFn']
+  const currentProperties: typeof import('./src/composables/store')['currentProperties']
   const customRef: typeof import('vue')['customRef']
   const debouncedRef: typeof import('@vueuse/core')['debouncedRef']
   const debouncedWatch: typeof import('@vueuse/core')['debouncedWatch']
@@ -41,6 +44,7 @@ declare global {
   const getCurrentScope: typeof import('vue')['getCurrentScope']
   const h: typeof import('vue')['h']
   const ignorableWatch: typeof import('@vueuse/core')['ignorableWatch']
+  const initStartPoint: typeof import('./src/composables/store')['initStartPoint']
   const inject: typeof import('vue')['inject']
   const isDark: typeof import('./src/composables/dark')['isDark']
   const isDefined: typeof import('@vueuse/core')['isDefined']
@@ -48,8 +52,10 @@ declare global {
   const isReactive: typeof import('vue')['isReactive']
   const isReadonly: typeof import('vue')['isReadonly']
   const isRef: typeof import('vue')['isRef']
+  const isSet: typeof import('./src/composables/store')['isSet']
   const makeDestructurable: typeof import('@vueuse/core')['makeDestructurable']
   const mapCenter: typeof import('./src/composables/store')['mapCenter']
+  const mapFeatureCollection: typeof import('./src/composables/store')['mapFeatureCollection']
   const mapLoad: typeof import('./src/composables/mapLoad')['mapLoad']
   const mapZoom: typeof import('./src/composables/store')['mapZoom']
   const markRaw: typeof import('vue')['markRaw']
@@ -74,7 +80,6 @@ declare global {
   const onUnmounted: typeof import('vue')['onUnmounted']
   const onUpdated: typeof import('vue')['onUpdated']
   const pausableWatch: typeof import('@vueuse/core')['pausableWatch']
-  const polygonFeatureCollection: typeof import('./src/composables/store')['polygonFeatureCollection']
   const provide: typeof import('vue')['provide']
   const pulsingDot: typeof import('./src/composables/point')['pulsingDot']
   const reactify: typeof import('@vueuse/core')['reactify']
@@ -90,6 +95,7 @@ declare global {
   const refDefault: typeof import('@vueuse/core')['refDefault']
   const refThrottled: typeof import('@vueuse/core')['refThrottled']
   const refWithControl: typeof import('@vueuse/core')['refWithControl']
+  const reloadSource: typeof import('./src/composables/mapLoad')['reloadSource']
   const resolveComponent: typeof import('vue')['resolveComponent']
   const resolveDirective: typeof import('vue')['resolveDirective']
   const resolveRef: typeof import('@vueuse/core')['resolveRef']
@@ -295,6 +301,8 @@ declare module 'vue' {
     readonly $shallowRef: UnwrapRef<typeof import('vue/macros')['$shallowRef']>
     readonly $toRef: UnwrapRef<typeof import('vue/macros')['$toRef']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
+    readonly TypeEnum: UnwrapRef<typeof import('./src/composables/store')['TypeEnum']>
+    readonly TypeEnumMap: UnwrapRef<typeof import('./src/composables/store')['TypeEnumMap']>
     readonly activeTab: UnwrapRef<typeof import('./src/composables/store')['activeTab']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
@@ -314,6 +322,7 @@ declare module 'vue' {
     readonly createReactiveFn: UnwrapRef<typeof import('@vueuse/core')['createReactiveFn']>
     readonly createSharedComposable: UnwrapRef<typeof import('@vueuse/core')['createSharedComposable']>
     readonly createUnrefFn: UnwrapRef<typeof import('@vueuse/core')['createUnrefFn']>
+    readonly currentProperties: UnwrapRef<typeof import('./src/composables/store')['currentProperties']>
     readonly customRef: UnwrapRef<typeof import('vue')['customRef']>
     readonly debouncedRef: UnwrapRef<typeof import('@vueuse/core')['debouncedRef']>
     readonly debouncedWatch: UnwrapRef<typeof import('@vueuse/core')['debouncedWatch']>
@@ -327,6 +336,7 @@ declare module 'vue' {
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
+    readonly initStartPoint: UnwrapRef<typeof import('./src/composables/store')['initStartPoint']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
     readonly isDark: UnwrapRef<typeof import('./src/composables/dark')['isDark']>
     readonly isDefined: UnwrapRef<typeof import('@vueuse/core')['isDefined']>
@@ -334,8 +344,10 @@ declare module 'vue' {
     readonly isReactive: UnwrapRef<typeof import('vue')['isReactive']>
     readonly isReadonly: UnwrapRef<typeof import('vue')['isReadonly']>
     readonly isRef: UnwrapRef<typeof import('vue')['isRef']>
+    readonly isSet: UnwrapRef<typeof import('./src/composables/store')['isSet']>
     readonly makeDestructurable: UnwrapRef<typeof import('@vueuse/core')['makeDestructurable']>
     readonly mapCenter: UnwrapRef<typeof import('./src/composables/store')['mapCenter']>
+    readonly mapFeatureCollection: UnwrapRef<typeof import('./src/composables/store')['mapFeatureCollection']>
     readonly mapLoad: UnwrapRef<typeof import('./src/composables/mapLoad')['mapLoad']>
     readonly mapZoom: UnwrapRef<typeof import('./src/composables/store')['mapZoom']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
@@ -360,7 +372,6 @@ declare module 'vue' {
     readonly onUnmounted: UnwrapRef<typeof import('vue')['onUnmounted']>
     readonly onUpdated: UnwrapRef<typeof import('vue')['onUpdated']>
     readonly pausableWatch: UnwrapRef<typeof import('@vueuse/core')['pausableWatch']>
-    readonly polygonFeatureCollection: UnwrapRef<typeof import('./src/composables/store')['polygonFeatureCollection']>
     readonly provide: UnwrapRef<typeof import('vue')['provide']>
     readonly pulsingDot: UnwrapRef<typeof import('./src/composables/point')['pulsingDot']>
     readonly reactify: UnwrapRef<typeof import('@vueuse/core')['reactify']>
@@ -376,6 +387,7 @@ declare module 'vue' {
     readonly refDefault: UnwrapRef<typeof import('@vueuse/core')['refDefault']>
     readonly refThrottled: UnwrapRef<typeof import('@vueuse/core')['refThrottled']>
     readonly refWithControl: UnwrapRef<typeof import('@vueuse/core')['refWithControl']>
+    readonly reloadSource: UnwrapRef<typeof import('./src/composables/mapLoad')['reloadSource']>
     readonly resolveComponent: UnwrapRef<typeof import('vue')['resolveComponent']>
     readonly resolveDirective: UnwrapRef<typeof import('vue')['resolveDirective']>
     readonly resolveRef: UnwrapRef<typeof import('@vueuse/core')['resolveRef']>

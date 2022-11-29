@@ -17,7 +17,6 @@ import drawStyles from '~/draw/styles'
 import ExtendDrawBar from '~/draw/extend_draw_bar'
 
 const keys = useMagicKeys()
-const esc = keys.esc
 
 mapboxgl.accessToken
   = 'pk.eyJ1IjoibGFuc2VyaWEiLCJhIjoiY2wxMGo5ZWk3MTF3dTNkcnRwcDMyMXowOSJ9.kxLDvTThtaU0uiBOXanNvA'
@@ -35,7 +34,7 @@ onMounted(() => {
   map = new mapboxgl.Map({
     container: mapContainer.value,
     style: mapStyle,
-    center: [122.1373164810982, 29.952575962927767],
+    center: c04Point,
     zoom: 15,
   })
   window.map = map
@@ -119,12 +118,12 @@ onMounted(() => {
   })
 })
 whenever(() => keys.Delete.value || keys.Backspace.value, () => {
-  console.log('esc/Backspace have been pressed')
+  console.warn('esc/Backspace have been pressed')
   window.draw.trash()
 })
 const handleCollapsed = () => {
   if (drawing)
-    console.log('drawing')
+    console.warn('drawing')
 
   collapsed.value = !collapsed.value
   setTimeout(() => {
