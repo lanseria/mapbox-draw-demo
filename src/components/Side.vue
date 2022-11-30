@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-import { activeTab } from '~/composables/store'
+import MonacoEditor from './MonacoEditor.vue'
+import { activeTab, mapFeatureCollection } from '~/composables/store'
 interface TabItem {
   label: string
   icon: string
@@ -27,6 +28,15 @@ const tabList: TabItem[] = [
     value: 'help',
   },
 ]
+
+const code = computed({
+  get() {
+    return JSON.stringify(mapFeatureCollection.value, null, 2)
+  },
+  set(newValue) {
+    mapFeatureCollection.value = JSON.parse(newValue)
+  },
+})
 const handleActive = (item: TabItem) => {
   activeTab.value = item.value
 }
@@ -41,8 +51,9 @@ const handleActive = (item: TabItem) => {
         </button>
       </div>
     </div>
-    <div>
-      <PropForm />
+    <div class="h-full">
+      <PropForm v-if="activeTab === 'edit'" />
+      <MonacoEditor v-if="activeTab === 'json'" v-model="code" />
     </div>
   </div>
 </template>

@@ -18,6 +18,7 @@
     "@vueuse/core": "^9.6.0",
     "mapbox-gl": "^2.11.0",
     "mapbox-gl-draw-circle": "^1.1.2",
+    "monaco-editor": "^0.34.1",
     "nanoid": "^4.0.0",
     "numeral": "^2.0.6",
     "vue": "^3.2.45",

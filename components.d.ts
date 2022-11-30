@@ -9,6 +9,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Header: typeof import('./src/components/Header.vue')['default']
     MapBox: typeof import('./src/components/MapBox.vue')['default']
+    MonacoEditor: typeof import('./src/components/MonacoEditor.vue')['default']
     PropForm: typeof import('./src/components/PropForm.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

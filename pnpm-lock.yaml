@@ -19,6 +19,7 @@ specifiers:
   eslint: ^8.28.0
   mapbox-gl: ^2.11.0
   mapbox-gl-draw-circle: ^1.1.2
+  monaco-editor: ^0.34.1
   nanoid: ^4.0.0
   numeral: ^2.0.6
   pnpm: ^7.17.1
@@ -42,6 +43,7 @@ dependencies:
   '@vueuse/core': 9.6.0_vue@3.2.45
   mapbox-gl: 2.11.0
   mapbox-gl-draw-circle: 1.1.2_mapbox-gl@2.11.0
+  monaco-editor: 0.34.1
   nanoid: 4.0.0
   numeral: 2.0.6
   vue: 3.2.45
@@ -4560,6 +4562,10 @@ packages:
       pkg-types: 1.0.1
       ufo: 1.0.0
     dev: true
+
+  /monaco-editor/0.34.1:
+    resolution: {integrity: sha512-FKc80TyiMaruhJKKPz5SpJPIjL+dflGvz4CpuThaPMc94AyN7SeC9HQ8hrvaxX7EyHdJcUY5i4D0gNyJj1vSZQ==}
+    dev: false
 
   /mousetrap/1.6.5:
     resolution: {integrity: sha512-QNo4kEepaIBwiT8CDhP98umTetp+JNfQYBWvC1pc6/OAibuXtRcxZ58Qz8skvEHYvURne/7R8T5VoOI7rDsEUA==}
