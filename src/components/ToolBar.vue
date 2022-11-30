@@ -1,17 +1,32 @@
 <script lang="ts" setup>
-import { 设定警戒区域 } from '~/composables/store'
+import { 设定警戒区域, 设置撤离路线, 设置消防车集合点, 设置物资医疗点, 设置警戒点, 设置进入路线 } from '~/composables/store'
 
 const handleSelectPolygon = (v: any) => {
-  console.log(v)
   if (v === '设定警戒区域')
     设定警戒区域()
+  if (v === '消防车集合点')
+    设置消防车集合点()
+}
+
+const handleSelectLineString = (v: any) => {
+  if (v === '进入路线')
+    设置进入路线()
+  if (v === '撤离路线')
+    设置撤离路线()
+}
+
+const handleSelectPoint = (v: any) => {
+  if (v === '警戒点')
+    设置警戒点()
+  if (v === '物资医疗点')
+    设置物资医疗点()
 }
 </script>
 
 <template>
   <div class="flex">
     <ASpace>
-      <a-dropdown>
+      <a-dropdown @select="handleSelectPoint">
         <a-button>
           <template #icon>
             <icon-location />
@@ -19,7 +34,7 @@ const handleSelectPolygon = (v: any) => {
           Point
         </a-button>
         <template #content>
-          <a-doption>
+          <a-doption value="警戒点">
             <template #icon>
               <icon-location />
             </template>
@@ -27,7 +42,7 @@ const handleSelectPolygon = (v: any) => {
               警戒点
             </template>
           </a-doption>
-          <a-doption>
+          <a-doption value="物资医疗点">
             <template #icon>
               <icon-location />
             </template>
@@ -35,7 +50,7 @@ const handleSelectPolygon = (v: any) => {
               物资医疗点
             </template>
           </a-doption>
-          <a-doption>
+          <a-doption value="总指挥部">
             <template #icon>
               <icon-location />
             </template>
@@ -43,7 +58,7 @@ const handleSelectPolygon = (v: any) => {
               总指挥部
             </template>
           </a-doption>
-          <a-doption>
+          <a-doption value="现场指挥部">
             <template #icon>
               <icon-location />
             </template>
@@ -51,7 +66,7 @@ const handleSelectPolygon = (v: any) => {
               现场指挥部
             </template>
           </a-doption>
-          <a-doption>
+          <a-doption value="安全出口点">
             <template #icon>
               <icon-location />
             </template>
@@ -59,7 +74,7 @@ const handleSelectPolygon = (v: any) => {
               安全出口点
             </template>
           </a-doption>
-          <a-doption>
+          <a-doption value="紧急逃离点">
             <template #icon>
               <icon-location />
             </template>
@@ -70,7 +85,7 @@ const handleSelectPolygon = (v: any) => {
         </template>
       </a-dropdown>
 
-      <a-dropdown>
+      <a-dropdown @select="handleSelectLineString">
         <a-button>
           <template #icon>
             <icon-share-alt />
@@ -78,7 +93,7 @@ const handleSelectPolygon = (v: any) => {
           Line
         </a-button>
         <template #content>
-          <a-doption>
+          <a-doption value="进入路线">
             <template #icon>
               <icon-share-alt />
             </template>
@@ -86,7 +101,7 @@ const handleSelectPolygon = (v: any) => {
               进入路线
             </template>
           </a-doption>
-          <a-doption>
+          <a-doption value="撤离路线">
             <template #icon>
               <icon-share-alt />
             </template>

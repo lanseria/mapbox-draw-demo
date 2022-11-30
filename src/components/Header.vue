@@ -1,4 +1,6 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { initStartPoint } from '~/composables/store'
+</script>
 
 <template>
   <div class="text-white px-3 flex relative">

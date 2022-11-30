@@ -10,11 +10,8 @@ import { mapLoad } from '~/composables/mapLoad'
 
 import DrawLineString from '~/draw/linestring'
 import DrawRectangle from '~/draw/rectangle'
-import DrawCircle from '~/draw/circle'
 
 import drawStyles from '~/draw/styles'
-
-import ExtendDrawBar from '~/draw/extend_draw_bar'
 
 const keys = useMagicKeys()
 
@@ -24,7 +21,7 @@ mapboxgl.accessToken
 let map: mapboxgl.Map | null = null
 const mapContainer = ref()
 
-let drawing = false
+const drawing = false
 
 const updateMap = () => {
   //
@@ -46,75 +43,22 @@ onMounted(() => {
       ...MapboxDraw.modes,
       draw_line_string: DrawLineString,
       draw_rectangle: DrawRectangle,
-      draw_circle: DrawCircle,
     },
     styles: drawStyles,
   })
   window.draw = draw
 
-  const drawControl = new ExtendDrawBar({
-    draw: window.draw,
-    buttons: [
-      {
-        on: 'click',
-        action: () => {
-          drawing = true
-          window.draw.changeMode('draw_point')
-        },
-        classes: ['mapbox-gl-draw_ctrl-draw-btn', 'mapbox-gl-draw_point'],
-        title: '画点 (m)',
-      },
-      {
-        on: 'click',
-        action: () => {
-          drawing = true
-          window.draw.changeMode('draw_line_string')
-        },
-        classes: ['mapbox-gl-draw_ctrl-draw-btn', 'mapbox-gl-draw_line'],
-        title: '画线 (l)',
-      },
-      {
-        on: 'click',
-        action: () => {
-          drawing = true
-          window.draw.changeMode('draw_polygon')
-        },
-        classes: ['mapbox-gl-draw_ctrl-draw-btn', 'mapbox-gl-draw_polygon'],
-        title: '画多边形 (p)',
-      },
-      {
-        on: 'click',
-        action: () => {
-          drawing = true
-          window.draw.changeMode('draw_rectangle')
-        },
-        classes: [
-          'mapbox-gl-draw_ctrl-draw-btn',
-          'mapbox-gl-draw_rectangle',
-        ],
-        title: '画矩形 (r)',
-      },
-      // {
-      //   on: 'click',
-      //   action: () => {
-      //     drawing = true
-      //     window.draw.changeMode('draw_circle')
-      //   },
-      //   classes: ['mapbox-gl-draw_ctrl-draw-btn', 'mapbox-gl-draw_circle'],
-      //   title: '画圆圈 (c)',
-      // },
-    ],
-  })
-
   map.addControl(new mapboxgl.NavigationControl())
-
-  map.addControl(drawControl, 'top-right')
-
+  map.addControl(draw, 'top-left')
   // map.addControl(new window.MapboxLanguage({ defaultLanguage: "zh-Hans" }));
 
   map.on('load', () => {
     mapLoad()
     updateMap()
+  })
+  map.on('draw.create', (e) => {
+    pushPolygon(e.features[0])
+    draw.deleteAll()
   })
 })
 whenever(() => keys.Delete.value || keys.Backspace.value, () => {

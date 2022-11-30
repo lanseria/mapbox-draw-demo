@@ -82,6 +82,7 @@ declare global {
   const pausableWatch: typeof import('@vueuse/core')['pausableWatch']
   const provide: typeof import('vue')['provide']
   const pulsingDot: typeof import('./src/composables/point')['pulsingDot']
+  const pushPolygon: typeof import('./src/composables/store')['pushPolygon']
   const reactify: typeof import('@vueuse/core')['reactify']
   const reactifyObject: typeof import('@vueuse/core')['reactifyObject']
   const reactive: typeof import('vue')['reactive']
@@ -103,6 +104,7 @@ declare global {
   const shallowReactive: typeof import('vue')['shallowReactive']
   const shallowReadonly: typeof import('vue')['shallowReadonly']
   const shallowRef: typeof import('vue')['shallowRef']
+  const svgBase64: typeof import('./src/composables/mapSvg')['svgBase64']
   const syncRef: typeof import('@vueuse/core')['syncRef']
   const syncRefs: typeof import('@vueuse/core')['syncRefs']
   const templateRef: typeof import('@vueuse/core')['templateRef']
@@ -374,6 +376,7 @@ declare module 'vue' {
     readonly pausableWatch: UnwrapRef<typeof import('@vueuse/core')['pausableWatch']>
     readonly provide: UnwrapRef<typeof import('vue')['provide']>
     readonly pulsingDot: UnwrapRef<typeof import('./src/composables/point')['pulsingDot']>
+    readonly pushPolygon: UnwrapRef<typeof import('./src/composables/store')['pushPolygon']>
     readonly reactify: UnwrapRef<typeof import('@vueuse/core')['reactify']>
     readonly reactifyObject: UnwrapRef<typeof import('@vueuse/core')['reactifyObject']>
     readonly reactive: UnwrapRef<typeof import('vue')['reactive']>
@@ -395,6 +398,7 @@ declare module 'vue' {
     readonly shallowReactive: UnwrapRef<typeof import('vue')['shallowReactive']>
     readonly shallowReadonly: UnwrapRef<typeof import('vue')['shallowReadonly']>
     readonly shallowRef: UnwrapRef<typeof import('vue')['shallowRef']>
+    readonly svgBase64: UnwrapRef<typeof import('./src/composables/mapSvg')['svgBase64']>
     readonly syncRef: UnwrapRef<typeof import('@vueuse/core')['syncRef']>
     readonly syncRefs: UnwrapRef<typeof import('@vueuse/core')['syncRefs']>
     readonly templateRef: UnwrapRef<typeof import('@vueuse/core')['templateRef']>
