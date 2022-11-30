@@ -57,7 +57,9 @@ onMounted(() => {
     updateMap()
   })
   map.on('draw.create', (e) => {
-    pushPolygon(e.features[0])
+    console.log(e.target)
+    console.log(e.features[0])
+    pushFeatures(e.features[0])
     draw.deleteAll()
   })
 })

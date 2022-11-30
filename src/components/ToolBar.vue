@@ -1,25 +1,21 @@
 <script lang="ts" setup>
-import { 设定警戒区域, 设置撤离路线, 设置消防车集合点, 设置物资医疗点, 设置警戒点, 设置进入路线 } from '~/composables/store'
+import type { TypeEnum } from '~/composables/store'
+import { 设置区域, 设置点, 设置路线 } from '~/composables/store'
 
-const handleSelectPolygon = (v: any) => {
-  if (v === '设定警戒区域')
-    设定警戒区域()
-  if (v === '消防车集合点')
-    设置消防车集合点()
+const pointList = TypeEnumList.filter(m => m.isShow && m.type === 'Point')
+const lineStringList = TypeEnumList.filter(m => m.isShow && m.type === 'LineString')
+const polygonList = TypeEnumList.filter(m => m.isShow && m.type === 'Polygon')
+
+const handleSelectPolygon = (item: any) => {
+  设置区域(item)
 }
 
-const handleSelectLineString = (v: any) => {
-  if (v === '进入路线')
-    设置进入路线()
-  if (v === '撤离路线')
-    设置撤离路线()
+const handleSelectLineString = (item: any) => {
+  设置路线(item)
 }
 
 const handleSelectPoint = (v: any) => {
-  if (v === '警戒点')
-    设置警戒点()
-  if (v === '物资医疗点')
-    设置物资医疗点()
+  设置点(v as TypeEnum)
 }
 </script>
 
@@ -34,52 +30,12 @@ const handleSelectPoint = (v: any) => {
           Point
         </a-button>
         <template #content>
-          <a-doption value="警戒点">
+          <a-doption v-for="(item) in pointList" :key="item.value" :value="item.value">
             <template #icon>
               <icon-location />
             </template>
             <template #default>
-              警戒点
-            </template>
-          </a-doption>
-          <a-doption value="物资医疗点">
-            <template #icon>
-              <icon-location />
-            </template>
-            <template #default>
-              物资医疗点
-            </template>
-          </a-doption>
-          <a-doption value="总指挥部">
-            <template #icon>
-              <icon-location />
-            </template>
-            <template #default>
-              总指挥部
-            </template>
-          </a-doption>
-          <a-doption value="现场指挥部">
-            <template #icon>
-              <icon-location />
-            </template>
-            <template #default>
-              现场指挥部
-            </template>
-          </a-doption>
-          <a-doption value="安全出口点">
-            <template #icon>
-              <icon-location />
-            </template>
-            <template #default>
-              安全出口点
-            </template>
-          </a-doption>
-          <a-doption value="紧急逃离点">
-            <template #icon>
-              <icon-location />
-            </template>
-            <template #default>
-              紧急逃离点
+              {{ item.label }}
             </template>
           </a-doption>
         </template>
@@ -93,20 +49,12 @@ const handleSelectPoint = (v: any) => {
           Line
         </a-button>
         <template #content>
-          <a-doption value="进入路线">
+          <a-doption v-for="(item) in lineStringList" :key="item.value" :value="item">
             <template #icon>
               <icon-share-alt />
             </template>
             <template #default>
-              进入路线
-            </template>
-          </a-doption>
-          <a-doption value="撤离路线">
-            <template #icon>
-              <icon-share-alt />
-            </template>
-            <template #default>
-              撤离路线
+              {{ item.label }}
             </template>
           </a-doption>
         </template>
@@ -120,20 +68,12 @@ const handleSelectPoint = (v: any) => {
           Polygon
         </a-button>
         <template #content>
-          <a-doption value="设定警戒区域">
+          <a-doption v-for="(item) in polygonList" :key="item.value" :value="item">
             <template #icon>
               <icon-relation />
             </template>
             <template #default>
-              设定警戒区域
-            </template>
-          </a-doption>
-          <a-doption value="消防车集合点">
-            <template #icon>
-              <icon-relation />
-            </template>
-            <template #default>
-              消防车集合点
+              {{ item.label }}
             </template>
           </a-doption>
         </template>

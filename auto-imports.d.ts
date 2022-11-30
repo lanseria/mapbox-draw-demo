@@ -10,6 +10,7 @@ declare global {
   const $toRef: typeof import('vue/macros')['$toRef']
   const EffectScope: typeof import('vue')['EffectScope']
   const TypeEnum: typeof import('./src/composables/store')['TypeEnum']
+  const TypeEnumList: typeof import('./src/composables/store')['TypeEnumList']
   const TypeEnumMap: typeof import('./src/composables/store')['TypeEnumMap']
   const activeTab: typeof import('./src/composables/store')['activeTab']
   const asyncComputed: typeof import('@vueuse/core')['asyncComputed']
@@ -82,7 +83,7 @@ declare global {
   const pausableWatch: typeof import('@vueuse/core')['pausableWatch']
   const provide: typeof import('vue')['provide']
   const pulsingDot: typeof import('./src/composables/point')['pulsingDot']
-  const pushPolygon: typeof import('./src/composables/store')['pushPolygon']
+  const pushFeatures: typeof import('./src/composables/store')['pushFeatures']
   const reactify: typeof import('@vueuse/core')['reactify']
   const reactifyObject: typeof import('@vueuse/core')['reactifyObject']
   const reactive: typeof import('vue')['reactive']
@@ -305,6 +306,7 @@ declare module 'vue' {
     readonly $toRef: UnwrapRef<typeof import('vue/macros')['$toRef']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly TypeEnum: UnwrapRef<typeof import('./src/composables/store')['TypeEnum']>
+    readonly TypeEnumList: UnwrapRef<typeof import('./src/composables/store')['TypeEnumList']>
     readonly TypeEnumMap: UnwrapRef<typeof import('./src/composables/store')['TypeEnumMap']>
     readonly activeTab: UnwrapRef<typeof import('./src/composables/store')['activeTab']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
@@ -377,7 +379,7 @@ declare module 'vue' {
     readonly pausableWatch: UnwrapRef<typeof import('@vueuse/core')['pausableWatch']>
     readonly provide: UnwrapRef<typeof import('vue')['provide']>
     readonly pulsingDot: UnwrapRef<typeof import('./src/composables/point')['pulsingDot']>
-    readonly pushPolygon: UnwrapRef<typeof import('./src/composables/store')['pushPolygon']>
+    readonly pushFeatures: UnwrapRef<typeof import('./src/composables/store')['pushFeatures']>
     readonly reactify: UnwrapRef<typeof import('@vueuse/core')['reactify']>
     readonly reactifyObject: UnwrapRef<typeof import('@vueuse/core')['reactifyObject']>
     readonly reactive: UnwrapRef<typeof import('vue')['reactive']>

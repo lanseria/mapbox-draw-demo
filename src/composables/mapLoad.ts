@@ -1,5 +1,5 @@
 import * as turf from '@turf/turf'
-import { svgBase64警戒引导点 } from './mapSvg'
+import { svgBase64安全出口, svgBase64总指挥部, svgBase64物资医疗点, svgBase64现场指挥部, svgBase64紧急逃离, svgBase64警戒引导点 } from './mapSvg'
 import { pulsingDot } from './point'
 import { isSet初始化点, isSet消防车集合点, isSet警戒区 } from './store'
 
@@ -14,7 +14,7 @@ const addSource = () => {
   initSetStatus()
   const features = mapFeatureCollection.value[0]
   if (mapFeatureCollection.value.length > 0) {
-    turf.propEach(features, (currentProperties: any, featureIndex) => {
+    turf.propEach(features, (currentProperties: any, _featureIndex) => {
       // console.warn(currentProperties, featureIndex)
       if (currentProperties.type === TypeEnum.初始化点)
         isSet初始化点.value = true
@@ -175,6 +175,11 @@ export const mapLoad = () => {
   map.addImage('pulsing-dot', pulsingDot(200), { pixelRatio: 2 })
 
   loadSvg('警戒引导点Icon', svgBase64警戒引导点)
+  loadSvg('物资医疗点Icon', svgBase64物资医疗点)
+  loadSvg('总指挥部Icon', svgBase64总指挥部)
+  loadSvg('现场指挥部Icon', svgBase64现场指挥部)
+  loadSvg('安全出口点Icon', svgBase64安全出口)
+  loadSvg('紧急逃离点Icon', svgBase64紧急逃离)
 
   setTimeout(() => {
     reloadSource()

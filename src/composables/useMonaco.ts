@@ -7,7 +7,7 @@ export default function useMonaco(language = 'json') {
     monacoEditor?.setValue(val)
     setTimeout(async () => {
       initReadOnly && monacoEditor?.updateOptions({ readOnly: false })
-      await monacoEditor?.getAction('editor.action.formatDocument').run()
+      // await monacoEditor?.getAction('editor.action.formatDocument').run()
       initReadOnly && monacoEditor?.updateOptions({ readOnly: true })
     }, 100)
   }
