@@ -202,10 +202,12 @@ export const pushFeatures = (feature: Feature<Polygon | LineString>) => {
   }
   const centerPoint = turf.center(feature)
   const map = window.map
-  console.log(map)
-  map.flyTo({
-    center: [0, 0],
-    zoom: 16,
+  console.log(`flyTo: ${centerPoint.geometry.coordinates}`)
+  setTimeout(() => {
+    map.flyTo({
+      center: centerPoint.geometry.coordinates as any,
+      zoom: 16,
+    })
   })
   // TODO: filter type
   mapFeatureCollection.value[0].features.push(feature)
@@ -213,7 +215,6 @@ export const pushFeatures = (feature: Feature<Polygon | LineString>) => {
 }
 
 export const 设置区域 = (item: any) => {
-  console.log(item)
   if (!判断初始化点位())
     return
 
@@ -224,7 +225,6 @@ export const 设置区域 = (item: any) => {
     type: item.value,
   }
   if (item.value === TypeEnum.警戒区) {
-    console.log(isSet警戒区.value)
     if (isSet警戒区.value) {
       Message.warning('已设置警戒区域')
       console.warn('已设置警戒区域')
