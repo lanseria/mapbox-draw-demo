@@ -1,5 +1,25 @@
 <script lang="ts" setup>
 import { initStartPoint } from '~/composables/store'
+
+const exportImg = () => {
+  //
+  const map = window.map
+  const mapCanvasDiv = map.getCanvasContainer()
+  const mapCanvas = mapCanvasDiv.querySelector('canvas')
+  console.log(mapCanvas)
+  const MIME_TYPE = 'image/png'
+
+  const imgURL = mapCanvas!.toDataURL(MIME_TYPE)
+
+  const dlLink = document.createElement('a')
+  dlLink.download = 'map.png'
+  dlLink.href = imgURL
+  dlLink.dataset.downloadurl = [MIME_TYPE, dlLink.download, dlLink.href].join(':')
+
+  document.body.appendChild(dlLink)
+  dlLink.click()
+  document.body.removeChild(dlLink)
+}
 </script>
 
 <template>
@@ -15,7 +35,7 @@ import { initStartPoint } from '~/composables/store'
           <a-button type="text" @click="initStartPoint()">
             初始化点位
           </a-button>
-          <a-button type="text">
+          <a-button type="text" @click="exportImg()">
             导出图片
           </a-button>
           <a-button type="text">

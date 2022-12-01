@@ -33,6 +33,7 @@ onMounted(() => {
     style: mapStyle,
     center: c04Point,
     zoom: 15,
+    preserveDrawingBuffer: true,
   })
   window.map = map
 
