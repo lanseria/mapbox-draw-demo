@@ -117,9 +117,12 @@ const drawLineArrow = () => {
       lineStringPointFeatures.push(point)
     }
   })
+  const map = window.map
+  if (map.getLayer('LayerWithLineStringArrowBearing'))
+    map.removeLayer('LayerWithLineStringArrowBearing')
   if (lineStringPointFeatures.length > 0) {
     const bearingPointsFeatures = turf.featureCollection(lineStringPointFeatures)
-    const map = window.map
+
     const source: any = map.getSource('LineStringSource')
     if (source) { source.setData(bearingPointsFeatures) }
     else {
@@ -130,8 +133,6 @@ const drawLineArrow = () => {
         data: bearingPointsFeatures,
       })
     }
-    if (map.getLayer('LayerWithLineStringArrowBearing'))
-      map.removeLayer('LayerWithLineStringArrowBearing')
     map.addLayer({
       id: 'LayerWithLineStringArrowBearing',
       type: 'symbol',
