@@ -34,6 +34,14 @@ export const mapStyle: mapboxgl.Style = {
       tileSize: 256,
       maxzoom: 20,
     },
+    osm: {
+      tiles: [
+        'https://a.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      ],
+      type: 'raster',
+      tileSize: 256,
+      maxzoom: 20,
+    },
   },
   layers: [
     {
@@ -43,21 +51,26 @@ export const mapStyle: mapboxgl.Style = {
         'background-color': 'rgba(0,0,0,0.5)',
       },
     },
-    {
-      id: 'tianditu',
-      source: 'tianditu',
-      type: 'raster',
-    },
+    // {
+    //   id: 'tianditu',
+    //   source: 'tianditu',
+    //   type: 'raster',
+    // },
     // 底图
-    {
-      id: 'seaMapDown',
-      source: 'seaMapDown',
-      type: 'raster',
-    },
+    // {
+    //   id: 'seaMapDown',
+    //   source: 'seaMapDown',
+    //   type: 'raster',
+    // },
     // 罐
+    // {
+    //   id: 'seaMapUp',
+    //   source: 'seaMapUp',
+    //   type: 'raster',
+    // },
     {
-      id: 'seaMapUp',
-      source: 'seaMapUp',
+      id: 'osm',
+      source: 'osm',
       type: 'raster',
     },
   ],
