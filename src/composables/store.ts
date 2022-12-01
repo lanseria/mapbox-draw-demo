@@ -53,11 +53,11 @@ export const TypeEnumList = [
     isShow: true,
     type: 'Polygon',
     properties: {
-      'fill': 'rgba(255, 100, 100, 0.7)',
+      'fill-color': '#ff6464',
       'fill-opacity': 0.5,
-      'stroke': 'rgba(255, 100, 100, 0.2)',
-      'stroke-width': 2,
-      'stroke-opacity': 1,
+      'line-color': '#ff6464',
+      'line-width': 2,
+      'line-opacity': 1,
       'radius': 150,
     },
   },
@@ -67,11 +67,11 @@ export const TypeEnumList = [
     isShow: true,
     type: 'Polygon',
     properties: {
-      'fill': '#e88b4d',
+      'fill-color': '#e88b4d',
       'fill-opacity': 0.8,
-      'stroke': 'rgba(224, 190, 40, 1)',
-      'stroke-width': 2,
-      'stroke-opacity': 1,
+      'line-color': '#e0be28',
+      'line-width': 2,
+      'line-opacity': 1,
     },
   },
   //
@@ -81,9 +81,9 @@ export const TypeEnumList = [
     isShow: true,
     type: 'LineString',
     properties: {
-      'stroke': '#ee6b3b',
-      'stroke-width': 6,
-      'stroke-opacity': 1,
+      'line-color': '#ee6b3b',
+      'line-width': 6,
+      'line-opacity': 1,
       'line-cap': 'round',
       'line-join': 'round',
     },
@@ -94,9 +94,9 @@ export const TypeEnumList = [
     isShow: true,
     type: 'LineString',
     properties: {
-      'stroke': '#ee4a3a',
-      'stroke-width': 6,
-      'stroke-opacity': 1,
+      'line-color': '#ee4a3a',
+      'line-width': 6,
+      'line-opacity': 1,
       'line-cap': 'round',
       'line-join': 'round',
     },
@@ -142,14 +142,6 @@ export const TypeEnumList = [
 
 export const c04Point: [number, number] = [122.1373164810982, 29.952575962927767]
 
-// fill: "rgba(255, 100, 100, 0.7)"
-// fill-opacity: 0.5
-// radius: 100
-// stroke: "rgba(255, 100, 100, 0.2)"
-// stroke-opacity: 3
-// stroke-width: 2
-// type: "警戒区"
-export const 默认警戒区distance = useStorage('aoshan-map-默认警戒区distance', 100) as Ref<number>
 export const isSet初始化点 = useStorage('aoshan-map-isSet初始化点', false) as Ref<boolean>
 export const isSet警戒区 = useStorage('aoshan-map-isSet警戒区', false) as Ref<boolean>
 export const isSet消防车集合点 = useStorage('aoshan-map-isSet消防车集合点', false) as Ref<boolean>

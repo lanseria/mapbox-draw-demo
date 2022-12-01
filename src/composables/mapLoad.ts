@@ -75,7 +75,7 @@ const drawPolygon = () => {
     source: 'MapSource', // reference the data source
     layout: {},
     paint: {
-      'fill-color': ['coalesce', ['get', 'fill'], '#000'],
+      'fill-color': ['coalesce', ['get', 'fill-color'], '#000'],
       'fill-opacity': ['coalesce', ['get', 'fill-opacity'], 0.3],
     },
     filter: ['==', ['geometry-type'], 'Polygon'],
@@ -87,9 +87,9 @@ const drawPolygon = () => {
     source: 'MapSource',
     layout: {},
     paint: {
-      'line-color': ['coalesce', ['get', 'stroke'], '#000'],
-      'line-width': ['coalesce', ['get', 'stroke-width'], 2],
-      'line-opacity': ['coalesce', ['get', 'stroke-opacity'], 1],
+      'line-color': ['coalesce', ['get', 'line-color'], '#000'],
+      'line-width': ['coalesce', ['get', 'line-width'], 2],
+      'line-opacity': ['coalesce', ['get', 'line-opacity'], 1],
     },
     filter: ['==', ['geometry-type'], 'Polygon'],
   })
@@ -118,9 +118,9 @@ const drawLine = () => {
       'line-join': ['coalesce', ['get', 'line-cap'], 'round'],
     },
     paint: {
-      'line-color': ['coalesce', ['get', 'stroke'], '#000'],
-      'line-width': ['coalesce', ['get', 'stroke-width'], 2],
-      'line-opacity': ['coalesce', ['get', 'stroke-opacity'], 1],
+      'line-color': ['coalesce', ['get', 'line-color'], '#000'],
+      'line-width': ['coalesce', ['get', 'line-width'], 2],
+      'line-opacity': ['coalesce', ['get', 'line-opacity'], 1],
     },
     filter: ['==', ['geometry-type'], 'LineString'],
   })
