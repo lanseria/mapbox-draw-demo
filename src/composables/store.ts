@@ -5,7 +5,6 @@ import * as turf from '@turf/turf'
 import type { Ref } from 'vue'
 import { Message } from '@arco-design/web-vue'
 import type { Feature, LineString, Point, Polygon } from '@turf/turf'
-import type { LngLatLike } from 'mapbox-gl'
 
 export enum TypeEnum {
   初始化点 = 'InitPoint',
