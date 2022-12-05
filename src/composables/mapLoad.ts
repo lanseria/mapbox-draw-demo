@@ -42,7 +42,6 @@ const handleLinestringOrPolygonClick = (e: any) => {
   // console.warn(feature)
   const draw = window.draw
   const mode = draw.getMode()
-  console.log(mode)
   if (mode === 'draw_line_string' || mode === 'draw_polygon' || mode === 'draw_point')
     return
   if (el.nodeName !== 'CANVAS')
@@ -179,18 +178,18 @@ const drawLine = () => {
     filter: ['==', ['geometry-type'], 'LineString'],
   })
 
-  // map.addLayer({
-  //   id: 'LayerWithLineStringArrow',
-  //   type: 'symbol',
-  //   source: 'MapSource',
-  //   layout: {
-  //     'symbol-placement': 'line',
-  //     'symbol-spacing': 1, // 图标间隔，默认为250
-  //     'icon-image': '线路箭头Icon', // 箭头图标
-  //     'icon-size': 0.5,
-  //   },
-  //   filter: ['==', ['geometry-type'], 'LineString'],
-  // })
+  map.addLayer({
+    id: 'LayerWithLineStringArrow',
+    type: 'symbol',
+    source: 'MapSource',
+    layout: {
+      'symbol-placement': 'line',
+      'symbol-spacing': 1, // 图标间隔，默认为250
+      'icon-image': '线路箭头Icon', // 箭头图标
+      'icon-size': 0.5,
+    },
+    filter: ['==', ['geometry-type'], 'LineString'],
+  })
   drawLineArrow()
   map.on('click', 'LayerWithLineString', handleLinestringOrPolygonClick)
 }
@@ -208,9 +207,10 @@ const drawPoint = () => {
     type: 'symbol',
     source: 'MapSource',
     layout: {
-      'icon-image': ['coalesce', ['get', 'icon-image'], 'pulsing-dot'],
+      'icon-image': ['get', 'icon-image'],
       'icon-size': ['coalesce', ['get', 'icon-size'], 1],
-      // 'icon-allow-overlap': ['coalesce', ['get', 'icon-allow-overlap'], false],
+      'icon-allow-overlap': false,
+      'icon-ignore-placement': false,
     },
     filter: ['==', ['geometry-type'], 'Point'],
   })

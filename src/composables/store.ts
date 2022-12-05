@@ -140,7 +140,7 @@ export const TypeEnumList = [
   },
 ]
 
-export const c04Point: [number, number] = [122.1373164810982, 29.952575962927767]
+export const c04Point = useStorage('aoshan-map-c04Point', [122.1373164810982, 29.952575962927767]) as Ref<[number, number]>
 
 export const isSet初始化点 = useStorage('aoshan-map-isSet初始化点', false) as Ref<boolean>
 export const isSet警戒区 = useStorage('aoshan-map-isSet警戒区', false) as Ref<boolean>
@@ -157,18 +157,6 @@ export const activeTab = useStorage('aoshan-map-activeTab', 'edit')
 
 export const currentProperties = ref(null) as Ref<any>
 
-export const initStartPoint = () => {
-  const point = turf.point(c04Point, {
-    'icon-image': 'pulsing-dot',
-    'type': TypeEnum.初始化点,
-    'color': '#fa8072',
-  })
-  mapFeatureCollection.value = []
-  mapFeatureCollection.value.push(turf.featureCollection([point]))
-
-  reloadSource()
-}
-
 const 判断初始化点位 = () => {
   if (!isSet初始化点.value) {
     Message.warning('请先初始化点位')
@@ -180,26 +168,51 @@ const 判断初始化点位 = () => {
   }
 }
 
+export const initStartPoint = () => {
+  mapFeatureCollection.value = [turf.featureCollection([])]
+  reloadSource()
+  // 设置完立即显示其当前要素属性
+  activeTab.value = 'edit'
+  currentProperties.value = {
+    'icon-image': 'pulsing-dot',
+    'type': TypeEnum.初始化点,
+    'color': '#fa8072',
+  }
+  const draw = window.draw
+  draw.changeMode('draw_point')
+}
 /**
  * push进入数据
  * @param polygon
  */
-export const pushFeatures = (feature: Feature<Polygon | LineString>) => {
+export const pushFeatures = (feature: Feature<Polygon | LineString | Point>) => {
+  const centerPoint = turf.center(feature)
   currentProperties.value = {
-    id: nanoid(),
     ...currentProperties.value,
+    center: centerPoint.geometry.coordinates,
+    id: nanoid(),
   }
   feature.properties = {
     ...currentProperties.value,
   }
-  const centerPoint = turf.center(feature)
+  // 如果是中心点则
+  if (feature.properties!.type === TypeEnum.初始化点)
+    c04Point.value = currentProperties.value.center
+
   const map = window.map
-  console.log(`flyTo: ${centerPoint.geometry.coordinates}`)
   setTimeout(() => {
-    map.flyTo({
-      center: centerPoint.geometry.coordinates as any,
-      zoom: 16,
-    })
+    if (feature.geometry.type === 'Point') {
+      map.flyTo({
+        center: currentProperties.value.center as any,
+        zoom: 20,
+      })
+    }
+    else {
+      const bbox = turf.bbox(feature)
+      map.fitBounds([[bbox[0], bbox[1]], [bbox[2], bbox[3]]], {
+        padding: 200,
+      })
+    }
   })
   // TODO: filter type
   mapFeatureCollection.value[0].features.push(feature)
@@ -222,7 +235,7 @@ export const 设置区域 = (item: any) => {
       console.warn('已设置警戒区域')
       return
     }
-    const polygon = turf.buffer(turf.point(c04Point), item.properties.radius, {
+    const polygon = turf.buffer(turf.point(c04Point.value), item.properties.radius, {
       units: 'meters',
     })
     // 存入数据
@@ -263,6 +276,7 @@ export const 设置点 = (type: TypeEnum) => {
     'icon-image': `${name}Icon`,
     'icon-size': 0.3,
     'icon-allow-overlap': true,
+    'icon-ignore-placement': true,
     'type': type,
   }
   const draw = window.draw

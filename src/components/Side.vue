@@ -13,14 +13,14 @@ const tabList: TabItem[] = [
     value: 'edit',
   },
   {
-    label: 'JSON',
-    icon: 'i-carbon:code',
-    value: 'json',
-  },
-  {
     label: '数据',
     icon: 'i-carbon:data-table',
     value: 'data',
+  },
+  {
+    label: 'JSON',
+    icon: 'i-carbon:code',
+    value: 'json',
   },
   {
     label: '帮助',
@@ -54,6 +54,7 @@ const handleActive = (item: TabItem) => {
     <div class="h-full">
       <PropForm v-if="activeTab === 'edit'" />
       <MonacoEditor v-if="activeTab === 'json'" v-model="code" />
+      <DataList v-if="activeTab === 'data'" />
     </div>
   </div>
 </template>
