@@ -108,7 +108,7 @@ const drawLineArrow = () => {
       const bearing = turf.bearing(last2Point, lastPoint)
       const point = turf.point(lastPoint, {
         bearing,
-        'icon-size': 0.2,
+        'icon-size': 0.15,
         'icon-image': 'shop-icon',
         'icon-rotation-alignment': 'map',
         'icon-color': currentFeature.properties!['line-color'],
@@ -209,8 +209,8 @@ const drawPoint = () => {
     layout: {
       'icon-image': ['get', 'icon-image'],
       'icon-size': ['coalesce', ['get', 'icon-size'], 1],
-      'icon-allow-overlap': false,
-      'icon-ignore-placement': false,
+      'icon-allow-overlap': true,
+      'icon-ignore-placement': true,
     },
     filter: ['==', ['geometry-type'], 'Point'],
   })

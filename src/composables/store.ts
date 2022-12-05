@@ -107,36 +107,42 @@ export const TypeEnumList = [
     value: TypeEnum.警戒引导点,
     isShow: true,
     type: 'Point',
+    iconName: 'icon-a-fenzu10',
   },
   {
     label: TypeEnumMap[TypeEnum.物资医疗点],
     value: TypeEnum.物资医疗点,
     isShow: true,
     type: 'Point',
+    iconName: 'icon-a-fenzu7',
   },
   {
     label: TypeEnumMap[TypeEnum.总指挥部],
     value: TypeEnum.总指挥部,
     isShow: true,
     type: 'Point',
+    iconName: 'icon-a-fenzu8',
   },
   {
     label: TypeEnumMap[TypeEnum.现场指挥部],
     value: TypeEnum.现场指挥部,
     isShow: true,
     type: 'Point',
+    iconName: 'icon-a-11',
   },
   {
     label: TypeEnumMap[TypeEnum.安全出口点],
     value: TypeEnum.安全出口点,
     isShow: true,
     type: 'Point',
+    iconName: 'icon-a-111',
   },
   {
     label: TypeEnumMap[TypeEnum.紧急逃离点],
     value: TypeEnum.紧急逃离点,
     isShow: true,
     type: 'Point',
+    iconName: 'icon-a-fenzu5',
   },
 ]
 
@@ -204,7 +210,7 @@ export const pushFeatures = (feature: Feature<Polygon | LineString | Point>) => 
     if (feature.geometry.type === 'Point') {
       map.flyTo({
         center: currentProperties.value.center as any,
-        zoom: 20,
+        zoom: 17,
       })
     }
     else {

@@ -36,7 +36,7 @@ const handleRowClick = (record: any) => {
   setTimeout(() => {
     map.flyTo({
       center: record.center as any,
-      zoom: 16,
+      zoom: 17,
     })
   })
 }

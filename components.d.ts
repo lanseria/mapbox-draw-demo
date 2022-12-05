@@ -9,8 +9,11 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     DataList: typeof import('./src/components/DataList.vue')['default']
     Header: typeof import('./src/components/Header.vue')['default']
+    Help: typeof import('./src/components/Help.vue')['default']
+    IconFont: typeof import('./src/components/IconFont.vue')['default']
     MapBox: typeof import('./src/components/MapBox.vue')['default']
     MonacoEditor: typeof import('./src/components/MonacoEditor.vue')['default']
+    MyIconFont: typeof import('./src/components/MyIconFont.vue')['default']
     PropForm: typeof import('./src/components/PropForm.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

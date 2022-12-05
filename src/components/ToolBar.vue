@@ -27,12 +27,12 @@ const handleSelectPoint = (v: any) => {
           <template #icon>
             <icon-location />
           </template>
-          Point
+          点
         </a-button>
         <template #content>
           <a-doption v-for="(item) in pointList" :key="item.value" :value="item.value">
             <template #icon>
-              <icon-location />
+              <MyIconFont :name="item.iconName" />
             </template>
             <template #default>
               {{ item.label }}
@@ -46,7 +46,7 @@ const handleSelectPoint = (v: any) => {
           <template #icon>
             <icon-share-alt />
           </template>
-          Line
+          线
         </a-button>
         <template #content>
           <a-doption v-for="(item) in lineStringList" :key="item.value" :value="item">
@@ -65,7 +65,7 @@ const handleSelectPoint = (v: any) => {
           <template #icon>
             <icon-relation />
           </template>
-          Polygon
+          面
         </a-button>
         <template #content>
           <a-doption v-for="(item) in polygonList" :key="item.value" :value="item">

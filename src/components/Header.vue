@@ -6,7 +6,6 @@ const exportImg = () => {
   const map = window.map
   const mapCanvasDiv = map.getCanvasContainer()
   const mapCanvas = mapCanvasDiv.querySelector('canvas')
-  console.log(mapCanvas)
   const MIME_TYPE = 'image/png'
 
   const imgURL = mapCanvas!.toDataURL(MIME_TYPE)

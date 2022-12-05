@@ -51,10 +51,11 @@ const handleActive = (item: TabItem) => {
         </button>
       </div>
     </div>
-    <div class="h-full">
+    <div class="h-full shrink-0">
       <PropForm v-if="activeTab === 'edit'" />
       <MonacoEditor v-if="activeTab === 'json'" v-model="code" />
       <DataList v-if="activeTab === 'data'" />
+      <Help v-if="activeTab === 'help'" />
     </div>
   </div>
 </template>
