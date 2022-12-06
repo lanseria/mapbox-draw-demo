@@ -27,7 +27,7 @@ const handleSave = () => {
     Message.warning('id 不存在')
     return
   }
-  const { onFetchResponse, onFetchError, data } = useFetch(`http://192.168.31.163:8099/easyview/api/rest/emergCom/plan/map/add?id=${id}`, {
+  const { onFetchResponse, onFetchError, data } = useFetch(`/interface/easyview/api/rest/emergCom/plan/map/add?id=${id}`, {
     mode: 'cors',
   }).post(mapFeatureCollection.value[0]).json()
   onFetchResponse((response) => {
