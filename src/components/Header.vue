@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-import { initStartPoint } from '~/composables/store'
+import { Message } from '@arco-design/web-vue'
+import { initStartPoint, mapFeatureCollection } from '~/composables/store'
 
 const exportImg = () => {
   //
@@ -19,6 +20,26 @@ const exportImg = () => {
   dlLink.click()
   document.body.removeChild(dlLink)
 }
+
+const handleSave = () => {
+  const route = useRoute()
+  const { id } = route.query
+  if (!id) {
+    Message.warning('id 不存在')
+    return
+  }
+  const { onFetchResponse, onFetchError, data } = useFetch(`http://192.168.31.163:8099/easyview/api/rest/emergCom/plan/map/add?id=${id}`).post(mapFeatureCollection.value[0]).json()
+  onFetchResponse((response) => {
+    if (data.value.code === 500)
+      Message.warning(data.value.msg)
+    else
+      Message.success('保存成功')
+  })
+
+  onFetchError((error) => {
+    console.error(error.message)
+  })
+}
 </script>
 
 <template>
@@ -37,7 +58,7 @@ const exportImg = () => {
           <a-button type="text" @click="exportImg()">
             导出图片
           </a-button>
-          <a-button type="text">
+          <a-button type="text" @click="handleSave()">
             保存
           </a-button>
         </div>
