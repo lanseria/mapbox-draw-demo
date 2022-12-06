@@ -27,8 +27,8 @@ export const mapStyle: mapboxgl.Style = {
     },
     tianditu: {
       tiles: [
-        'http://t1.tianditu.gov.cn/DataServer?T=img_w&x={x}&y={y}&l={z}&tk=c64908713d684abbbe549b44d6d4d8bd',
-        'http://t0.tianditu.gov.cn/DataServer?T=img_w&x={x}&y={y}&l={z}&tk=c64908713d684abbbe549b44d6d4d8bd',
+        '//t1.tianditu.gov.cn/DataServer?T=img_w&x={x}&y={y}&l={z}&tk=c64908713d684abbbe549b44d6d4d8bd',
+        '//t0.tianditu.gov.cn/DataServer?T=img_w&x={x}&y={y}&l={z}&tk=c64908713d684abbbe549b44d6d4d8bd',
       ],
       type: 'raster',
       tileSize: 256,

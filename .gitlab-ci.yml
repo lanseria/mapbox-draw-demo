@@ -1,0 +1,48 @@
+stages:
+  - build-dev
+  - deploy-dev
+
+cache:
+  key: ${CI_COMMIT_REF_NAME}
+  paths:
+    - node_modules/
+
+build_dev_job:
+  image: node:16.17.0
+  stage: build-dev
+  only:
+    - mapbox-draw
+  tags:
+    - develop
+  script:
+    - npm i -g pnpm --registry=https://mirrors.cloud.tencent.com/npm/
+    - pnpm i --registry=https://mirrors.cloud.tencent.com/npm/
+    - pnpm build
+  artifacts:
+    name: "aoshan-map-draw-$CI_COMMIT_REF_SLUG-$CI_COMMIT_SHA"
+    expire_in: 1 week
+    paths:
+      - dist
+
+
+deploy_dev_job:
+  image: alpine:3.16.2
+  stage: deploy-dev
+  only:
+    - mapbox-draw
+  tags:
+    - develop
+  script:
+    - echo "http://mirrors.aliyun.com/alpine/v3.9/main/" > /etc/apk/repositories
+    - apk add --no-cache rsync openssh
+    # curl unzip
+    # - 'curl --location --output artifacts.zip --header "JOB-TOKEN: $CI_JOB_TOKEN" "https://gitlab.ivhik.cn/frontend/ican-ui/-/jobs/artifacts/master/download?job=build_job"'
+    # - unzip -q artifacts.zip
+    # - rm -rf artifacts.zip
+    - mkdir -p ~/.ssh
+    - echo "$SSH_PRIVATE_KEY"
+    - echo "$SSH_PRIVATE_KEY" >> ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - echo -e "Host $SSH_IP\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+    - rsync -rav -e "ssh -p 22" --delete dist/ "$SSH_USER@$SSH_IP:$SSH_PATH/aoshan-map/dist"
+    - rsync -rav -e "ssh -p 22" --delete nginx/ "$SSH_USER@$SSH_IP:$SSH_PATH/aoshan-map/nginx"
