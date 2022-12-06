@@ -1,4 +1,4 @@
-/// <reference types="vitest" />
+/// <reference types="vite" />
 
 import path from 'path'
 import { defineConfig } from 'vite'
@@ -63,8 +63,4 @@ export default defineConfig({
     Unocss(),
   ],
 
-  // https://github.com/vitest-dev/vitest
-  test: {
-    environment: 'jsdom',
-  },
 })

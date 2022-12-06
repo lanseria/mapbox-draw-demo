@@ -19,7 +19,7 @@ mapboxgl.accessToken
   = 'pk.eyJ1IjoibGFuc2VyaWEiLCJhIjoiY2wxMGo5ZWk3MTF3dTNkcnRwcDMyMXowOSJ9.kxLDvTThtaU0uiBOXanNvA'
 
 let map: mapboxgl.Map | null = null
-const mapContainer = ref()
+const mapContainer = shallowRef()
 
 const drawing = false
 
@@ -58,8 +58,6 @@ onMounted(() => {
     updateMap()
   })
   map.on('draw.create', (e) => {
-    console.log(e.target)
-    console.log(e.features[0])
     pushFeatures(e.features[0])
     draw.deleteAll()
   })

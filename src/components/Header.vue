@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { Message } from '@arco-design/web-vue'
 import { initStartPoint, mapFeatureCollection } from '~/composables/store'
-
+const route = useRoute()
 const exportImg = () => {
   //
   const map = window.map
@@ -22,7 +22,6 @@ const exportImg = () => {
 }
 
 const handleSave = () => {
-  const route = useRoute()
   const { id } = route.query
   if (!id) {
     Message.warning('id 不存在')
