@@ -51,27 +51,27 @@ export const mapStyle: mapboxgl.Style = {
         'background-color': 'rgba(0,0,0,0.5)',
       },
     },
-    // {
-    //   id: 'tianditu',
-    //   source: 'tianditu',
-    //   type: 'raster',
-    // },
-    // 底图
-    // {
-    //   id: 'seaMapDown',
-    //   source: 'seaMapDown',
-    //   type: 'raster',
-    // },
-    // 罐
-    // {
-    //   id: 'seaMapUp',
-    //   source: 'seaMapUp',
-    //   type: 'raster',
-    // },
     {
-      id: 'osm',
-      source: 'osm',
+      id: 'tianditu',
+      source: 'tianditu',
       type: 'raster',
     },
+    // 底图
+    {
+      id: 'seaMapDown',
+      source: 'seaMapDown',
+      type: 'raster',
+    },
+    // 罐
+    {
+      id: 'seaMapUp',
+      source: 'seaMapUp',
+      type: 'raster',
+    },
+    // {
+    //   id: 'osm',
+    //   source: 'osm',
+    //   type: 'raster',
+    // },
   ],
 }

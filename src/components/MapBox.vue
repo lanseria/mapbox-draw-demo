@@ -30,7 +30,7 @@ const updateMap = () => {
 onMounted(() => {
   map = new mapboxgl.Map({
     container: mapContainer.value,
-    style: 'mapbox://styles/mapbox/outdoors-v12',
+    style: mapStyle,
     center: c04Point.value,
     zoom: 15,
     preserveDrawingBuffer: true,

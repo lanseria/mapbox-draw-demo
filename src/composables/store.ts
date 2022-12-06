@@ -203,7 +203,7 @@ export const pushFeatures = (feature: Feature<Polygon | LineString | Point>) => 
   }
   // 如果是中心点则
   if (feature.properties!.type === TypeEnum.初始化点)
-    c04Point.value = currentProperties.value.center
+    currentProperties.value.center && (c04Point.value = currentProperties.value.center)
 
   const map = window.map
   setTimeout(() => {

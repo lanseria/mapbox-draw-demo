@@ -10,7 +10,7 @@ const handleUpdate = () => {
   if (featureIdx >= 0) {
     let polygon = mapFeatureCollection.value[0].features[featureIdx]
     if (currentProperties.value.type === TypeEnum.警戒区) {
-      polygon = turf.buffer(turf.point(c04Point), currentProperties.value.radius, {
+      polygon = turf.buffer(turf.point(c04Point.value), currentProperties.value.radius, {
         units: 'meters',
       })
     }

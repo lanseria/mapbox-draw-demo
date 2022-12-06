@@ -24,7 +24,7 @@ const polygonList = computed(() => {
 })
 const handleStart = () => {
   map.flyTo({
-    center: c04Point,
+    center: c04Point.value,
   })
   if (map.getLayer('layer-with-pulsing-dot'))
     map.removeLayer('layer-with-pulsing-dot')
@@ -64,11 +64,11 @@ const getAllPolygon = () => {
 }
 const handleSetCircle = () => {
   if (!taskList.value.警戒区) {
-    const point = turf.point(c04Point)
+    const point = turf.point(c04Point.value)
     const circleFeature = turf.buffer(point, 警戒区大小.value, { units: 'meters' })
     circleFeature.properties = {
       type: '警戒区',
-      center: c04Point,
+      center: c04Point.value,
       isCircle: true,
       radiusInKm: 警戒区大小.value / 1000,
     }
