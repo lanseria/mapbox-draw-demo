@@ -1,5 +1,5 @@
 import * as turf from '@turf/turf'
-import * as numeral from 'numeral'
+import numeral from 'numeral'
 
 function getDisplayMeasurements(feature) {
   // should log both metric and standard display strings for the current drawn feature
