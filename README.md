@@ -1,5 +1,11 @@
 # mapbox-draw-demo
 
+# Docker Cli
+
+```
+docker run --name aoshan-map -it -v /home/dell/aoshan-map/dist:/usr/share/nginx/html -v /home/dell/aoshan-map/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf -v /home/dell/aoshan-map/nginx/nginx.conf:/etc/nginx/nginx.conf -p 7070:80 --restart always -d nginx
+```
+
 ## Demo Picture
 
 ![](./docs/imgs/index.png)
