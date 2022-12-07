@@ -54,6 +54,7 @@ onMounted(() => {
   // map.addControl(new window.MapboxLanguage({ defaultLanguage: "zh-Hans" }));
 
   map.on('load', () => {
+    map!.resize()
     mapLoad()
     updateMap()
   })
