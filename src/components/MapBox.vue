@@ -2,7 +2,7 @@
 import mapboxgl from 'mapbox-gl'
 import MapboxDraw from '@mapbox/mapbox-gl-draw'
 
-import { mapStyle } from '~/constant/map'
+// import { mapStyle } from '~/constant/map'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css'
 import { collapsed } from '~/composables/store'
@@ -30,7 +30,7 @@ const updateMap = () => {
 onMounted(() => {
   map = new mapboxgl.Map({
     container: mapContainer.value,
-    style: mapStyle,
+    style: 'mapbox://styles/mapbox/outdoors-v12',
     center: c04Point.value,
     zoom: 15,
     preserveDrawingBuffer: true,

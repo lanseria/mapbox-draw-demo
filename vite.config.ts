@@ -13,24 +13,7 @@ import Unocss from 'unocss/vite'
 export default defineConfig({
 
   server: {
-    proxy: {
-      '^/gis/': {
-        target: 'http://60.163.156.98:30080',
-        changeOrigin: true,
-        rewrite: (path) => {
-          const replacePath = path.replace(/^\/gis/, '')
-          return replacePath
-        },
-      },
-      '^/interface/': {
-        target: 'http://192.168.31.163:8099',
-        changeOrigin: true,
-        rewrite: (path) => {
-          const replacePath = path.replace(/^\/interface/, '')
-          return replacePath
-        },
-      },
-    },
+    proxy: { },
   },
   resolve: {
     alias: {
